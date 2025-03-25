@@ -1,4 +1,4 @@
-#include "ClientsDB.h"
+﻿#include "ClientsDB.h"
 
 int main(int argc, char** argv)
 {
@@ -6,7 +6,7 @@ int main(int argc, char** argv)
     SetConsoleOutputCP(CP_UTF8);
     try
     {
-        std::string connection_string = "host=127.0.0.1 port=5432 dbname=Clients user=postgres password=postgres";
+        std::string connection_string = "host=127.0.0.1 port=5432 dbname=clients user=postgres password=postgres";
         ClientsDB db(connection_string);
         db.dropTables();
         db.createTables();

@@ -124,7 +124,7 @@ std::vector<Client> ClientsDB::findClients(const std::string& query)
         "FROM clients "
         "LEFT JOIN public.phones on public.clients.id = public.phones.client_id "
         "WHERE clients.name = $1 OR clients.surname = $1 OR clients.email = $1 OR phones.phone = $1;", query);
-        for (auto& row : res) {
+        for (const auto& row : res) {
             Client client;
             client.name_ = row["name"].as<std::string>();
             client.surname_ = row["surname"].as<std::string>();
@@ -140,7 +140,7 @@ void ClientsDB::show()
 
     pqxx::result tables = trn.exec("SELECT table_name FROM information_schema.tables WHERE table_schema='public';");
 
-    for (auto& row : tables)
+    for (const auto& row : tables)
     {
         std::string table_name = row[0].as<std::string>();
 
@@ -148,8 +148,8 @@ void ClientsDB::show()
         pqxx::result data = trn.exec(query);
 
         std::cout << "Table: " << table_name << std::endl;
-        for (auto& row : data) {
-            for (auto& field : row) {
+        for (const auto& row : data) {
+            for (const auto& field : row) {
                 std::cout << field.c_str() << "  ";
             }
             std::cout << std::endl;
